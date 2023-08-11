@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>壁纸</title>
+    <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+    <script>
+
+        settingVisible = 0 ;
+        function setting_show () {
+            settingVisible = 1- settingVisible ;
+
+            if (settingVisible) {
+                document.getElementById("change_color_and_music_kit").style.visibility= "visible";
+            }else {
+                document.getElementById("change_color_and_music_kit").style.visibility= "hidden";
+            }
+
+        }
+
+        function change_word_color() {
+            var word_color = document.getElementById("word_color").value;
+
+
+            document.getElementById("time").style.color =word_color.toString();
+            document.getElementById("date").style.color =word_color.toString();
+            document.getElementById("hitokoto").style.color =word_color.toString();
+        }
+
+        function change_back_color() {
+            var word_color = document.getElementById("back_color").value;
+            document.body.style.backgroundColor = word_color.toString()
+        }
+
+        function change_music () {
+            var URL = document.getElementById("music_lnk").value;
+            document.getElementById("music_exlink").outerHTML=URL;
+        }
+
+        function refresh () {
+
+            str_time = new Date().toTimeString().substring(0,8) ;
+            str_date =(new Date().getMonth() + 1).toString() + "月"
+                + (new Date().getDate() ).toString() + "日"
+                + "星期" + "日一二三四五六".charAt(new Date().getDay());
+            //new Date().getHours();
+
+            document.getElementById("time").innerHTML = str_time ;
+            document.getElementById("date").innerHTML = str_date ;
+        }
+
+
+        setInterval("refresh()",990);
+    </script>
+    <style>
+        .css_time {
+            font-family: Consolas;
+            font-size: 10em;
+            text-align: center;
+            margin: 1em 0em 0em 0em;
+            color:darkgreen;
+        }
+
+        .css_date {
+            font-family: "仿宋";
+            font-size: 2em;
+            margin: 0em 0em 0em 0em;
+            text-align: center;
+        }
+
+        .css_tokoto {
+            font-family: "楷体";
+            font-size=1em;
+            text-align: center;
+            color:green;
+        }
+
+        .div_a{  text-align:center}
+
+        .css_change_color_and_music_kit{
+            font-family: :"宋体";
+            font-size=1em;
+            text-align: center;
+            color:green;
+            visibility: hidden;
+        }
+
+        .css_Button {
+
+            background-color: white;
+            color: black;
+            border: 2px solid #008CBA;
+            font-family: "宋体";
+
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="div_a">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="https://music.163.com/outchain/player?type=2&id=1407551413&auto=1&height=32" id = "music_exlink"></iframe>
+</div>
+<p id="hitokoto" class="css_tokoto">
+    :D 获取中...
+</p>
+
+<p class="css_time"  id = "time">hh:mm:ss</p>
+<p class="css_date"  id = "date">yyyy 年 mm 月 dd 日 </p>
+
+<br>
+<br>
+
+<div class="div_a">
+    <Button onclick="setting_show()"  class="css_Button"  >显示/隐藏设置</Button>
+</div>
+
+<br>
+<br>
+<div id = "change_color_and_music_kit" class="css_change_color_and_music_kit">
+    <input id = "word_color" type = "color">
+    <button onclick = "change_word_color()"  class="css_Button"> 设置为文字颜色 </button>
+
+    <input id = "back_color" type = "color">
+    <button onclick = "change_back_color()"  class="css_Button"> 设置为背景颜色 </button>
+
+    <br>
+    <br>
+
+    <input id = "music_lnk" type="text" >输入外链播放器HTML</id>
+    <button onclick = "change_music()" class="css_Button"> 更新歌曲 </button>
+</div>
+
+
+</body>
+</html>
